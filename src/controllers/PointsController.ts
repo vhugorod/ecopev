@@ -53,13 +53,14 @@ class PointsController {
   async create(request: Request, response: Response) {
     const {
       name,
-      email,
+      expedient,
       whatsapp,
       latitude,
       longitude,
       city,
       uf,
-      items
+      items,
+      recommendations,
     } = request.body;
   
     const trx = await knex.transaction();
@@ -67,12 +68,13 @@ class PointsController {
     const point = {
       image: request.file.filename,
       name,
-      email,
+      expedient,
       whatsapp,
       latitude,
       longitude,
       city,
-      uf
+      uf,
+      recommendations,
     };
   
     const insertedIds = await trx('points').insert(point);
